@@ -5,13 +5,13 @@ FROM python:3.11-bullseye
 WORKDIR /
 
 # Copy the requirements file into the container at /src
-COPY requirements.txt /src/
+COPY requirements.txt /requirements.txt
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt
 
 # Copy the current directory contents into the container at /src
-COPY . /src/
+COPY . /
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
@@ -23,4 +23,4 @@ ENV NAME fast-api-docker
 LABEL maintainer="tejosiam <tejosiam@gmail.com>"
 
 # Run main.py when the container launches
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "80"]DockerfileCopy code
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "80"]
