@@ -1,0 +1,331 @@
+--
+-- PostgreSQL database cluster dump
+--
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- Drop databases (except postgres and template1)
+--
+
+
+
+
+
+--
+-- Drop roles
+--
+
+DROP ROLE tejo;
+
+
+--
+-- Roles
+--
+
+CREATE ROLE tejo;
+ALTER ROLE tejo WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:sNRps2Oe7dQ3jrMpLetfVw==$PCvC1DmVGjSeZ0UtM0lLxAGTWay760bfohzcp2rz+jk=:rWpkEc++PI4i1uEXxZ1YY+CEn0gU1myNJfYKimy2tN8=';
+
+--
+-- User Configurations
+--
+
+
+
+
+
+
+
+
+--
+-- Databases
+--
+
+--
+-- Database "template1" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.0 (Debian 16.0-1.pgdg120+1)
+-- Dumped by pg_dump version 16.0 (Debian 16.0-1.pgdg120+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+UPDATE pg_catalog.pg_database SET datistemplate = false WHERE datname = 'template1';
+DROP DATABASE template1;
+--
+-- Name: template1; Type: DATABASE; Schema: -; Owner: tejo
+--
+
+CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
+
+
+ALTER DATABASE template1 OWNER TO tejo;
+
+\connect template1
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: DATABASE template1; Type: COMMENT; Schema: -; Owner: tejo
+--
+
+COMMENT ON DATABASE template1 IS 'default template for new databases';
+
+
+--
+-- Name: template1; Type: DATABASE PROPERTIES; Schema: -; Owner: tejo
+--
+
+ALTER DATABASE template1 IS_TEMPLATE = true;
+
+
+\connect template1
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: DATABASE template1; Type: ACL; Schema: -; Owner: tejo
+--
+
+REVOKE CONNECT,TEMPORARY ON DATABASE template1 FROM PUBLIC;
+GRANT CONNECT ON DATABASE template1 TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "postgres" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.0 (Debian 16.0-1.pgdg120+1)
+-- Dumped by pg_dump version 16.0 (Debian 16.0-1.pgdg120+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+DROP DATABASE postgres;
+--
+-- Name: postgres; Type: DATABASE; Schema: -; Owner: tejo
+--
+
+CREATE DATABASE postgres WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
+
+
+ALTER DATABASE postgres OWNER TO tejo;
+
+\connect postgres
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: DATABASE postgres; Type: COMMENT; Schema: -; Owner: tejo
+--
+
+COMMENT ON DATABASE postgres IS 'default administrative connection database';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: brand; Type: TABLE; Schema: public; Owner: tejo
+--
+
+CREATE TABLE public.brand (
+    brand_id uuid DEFAULT gen_random_uuid() NOT NULL,
+    name text
+);
+
+
+ALTER TABLE public.brand OWNER TO tejo;
+
+--
+-- Name: product; Type: TABLE; Schema: public; Owner: tejo
+--
+
+CREATE TABLE public.product (
+    product_id uuid DEFAULT gen_random_uuid() NOT NULL,
+    name text,
+    description text,
+    brand_id uuid
+);
+
+
+ALTER TABLE public.product OWNER TO tejo;
+
+--
+-- Name: tes; Type: TABLE; Schema: public; Owner: tejo
+--
+
+CREATE TABLE public.tes (
+    "productID" character(1) NOT NULL
+);
+
+
+ALTER TABLE public.tes OWNER TO tejo;
+
+--
+-- Data for Name: brand; Type: TABLE DATA; Schema: public; Owner: tejo
+--
+
+COPY public.brand (brand_id, name) FROM stdin;
+32e48b3b-29af-4281-af1c-afb55edda084	Golden Lamian
+\.
+
+
+--
+-- Data for Name: product; Type: TABLE DATA; Schema: public; Owner: tejo
+--
+
+COPY public.product (product_id, name, description, brand_id) FROM stdin;
+b9ab50c6-aa24-48d4-9b6b-267e325d79c8	Value Meals	Noodles + ice lemon tea	32e48b3b-29af-4281-af1c-afb55edda084
+eb7c5b29-6a5d-4a2f-8966-d56c1a9bbd41	Lemon Tea	Hot Lemon Tea	32e48b3b-29af-4281-af1c-afb55edda084
+27c7b7e5-d46c-4bc3-89eb-46e73eb59869	Xtra Spicy Series	Level 2	32e48b3b-29af-4281-af1c-afb55edda084
+3c77280b-f9ed-4f73-bfc2-88c927cdbdca	Ice Creame	Ice cream	32e48b3b-29af-4281-af1c-afb55edda084
+d9b2c57f-f8e6-49fa-8769-74564c2bdcd7	Ice Cream	Vanila Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+7b38f24d-ae29-4c82-841f-93d7c49853ef	Ice Cream	Vanila Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+16c98b33-42ed-46f2-9ee9-c3b619623463	Ice Cream	Ice cream	32e48b3b-29af-4281-af1c-afb55edda084
+a8a7d145-d9ac-4ee3-a500-7f697aedf9ed	Ice Cream	Vanila Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+01327321-b2e2-4ea2-8310-640e5abdd41d	Ice Cream	Vanila Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+de496275-5816-4f75-a037-fe3c5578af94	Ice Cream	Vanila Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+617f8c90-05e8-41d6-ae77-5e769ebcf161	Ice Cream	Vanila Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+dfcf6c90-def7-4262-a57d-6c123d0ddbdc	Ice Cream	Vanila Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+9a69d570-ec32-4070-8677-6b32e0170ba3	Ice Cream	Vanila Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+70c9dd41-89dc-462c-a340-e0b41458802e	Ice Cream	Vanila Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+dcc04e4f-f525-49f3-a60c-0af55efd7615	Ice Cream	Vanila Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+3b8f2d62-ab11-4223-9b5e-645c5fb9d0a4	Ice Cream	Vanila Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+a6016d6e-d2d6-4e49-9a44-f8537bf213f3	Ice Cream	Vanila Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+4548a32e-2570-4f74-8e05-2bad81c0da40	Ice Cream	Vanila Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+01177461-b757-4039-b41c-5f5ff8ba229c	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+7231b1da-1031-4153-97bf-ced103656cd3	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+ec668855-a222-4ca6-ba0e-27ba6baf5ece	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+c45d00db-78bb-4fcd-ba21-318fb57dc25e	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+0c117391-0798-4016-90ba-1c21dacdf474	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+6dfc1573-5187-40c9-baff-452a45c8a310	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+8a69b225-15f9-4d65-9581-8993872d8442	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+c3ff8ac0-3748-4f1b-96f3-168ebf8b7085	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+9565a4ba-476e-4aee-bcdf-a8b4827375cd	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+917c8493-9ad3-4ba9-b506-13d3c733bd90	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+7216a197-aae6-4fb0-ab42-085036735683	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+2716c509-85d5-4c8a-afb8-66d923240270	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+13bbb2e2-cee7-4ce6-9ff2-0c406f48fd79	Ice Tea	Ice Tea	32e48b3b-29af-4281-af1c-afb55edda084
+1fd0d5c1-2cf2-48d9-88a9-26fafdffec15	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+07ded2bd-d226-4748-a547-bf62689f8de9	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+e035a497-93ef-4a9c-bdd9-92238722623b	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+1e46e135-71f2-4865-9e34-1d7ed3e722ed	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+b86bc306-7ceb-46f2-ba38-d7dd5f34de20	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+db900b37-a00a-4968-8e87-5f8f1f73f796	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+71bd07b6-5a5b-4e89-91d7-e6ac2acc9936	Value Meals 3	Noodles + Lemon Tea	32e48b3b-29af-4281-af1c-afb55edda084
+6981f0c9-5d7b-47d6-a660-106bc84d2afc	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+7bcbfc3f-1b06-4e91-bea1-c87eca9d9111	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+b02c9eea-600b-4811-a470-60838a6fe4f1	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+b0ca712e-b69e-4e33-900f-03b44ab4cad1	Ice Cream	Vanilla Ice Cream	32e48b3b-29af-4281-af1c-afb55edda084
+\.
+
+
+--
+-- Data for Name: tes; Type: TABLE DATA; Schema: public; Owner: tejo
+--
+
+COPY public.tes ("productID") FROM stdin;
+\.
+
+
+--
+-- Name: brand brand_pkey; Type: CONSTRAINT; Schema: public; Owner: tejo
+--
+
+ALTER TABLE ONLY public.brand
+    ADD CONSTRAINT brand_pkey PRIMARY KEY (brand_id);
+
+
+--
+-- Name: product product_pkey; Type: CONSTRAINT; Schema: public; Owner: tejo
+--
+
+ALTER TABLE ONLY public.product
+    ADD CONSTRAINT product_pkey PRIMARY KEY (product_id);
+
+
+--
+-- Name: tes tes_pkey; Type: CONSTRAINT; Schema: public; Owner: tejo
+--
+
+ALTER TABLE ONLY public.tes
+    ADD CONSTRAINT tes_pkey PRIMARY KEY ("productID");
+
+
+--
+-- Name: product product_brandid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: tejo
+--
+
+ALTER TABLE ONLY public.product
+    ADD CONSTRAINT product_brandid_fkey FOREIGN KEY (brand_id) REFERENCES public.brand(brand_id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database cluster dump complete
+--
+
